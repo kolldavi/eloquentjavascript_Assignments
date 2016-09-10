@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>chapter 13 HTML js</title>
+
+<style>
+  /* Defines a cleaner look for tables */
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+</style>
+
+</style>
+</head>
+<body>
+
+<script src="chapter13.js"></script>
+
+<p style="text-align: center">
+<img src="cat.png" id="cat" style="position: relative">
+<img src="hat.png" id="hat" style="position: relative">
+</p>
+<script> 
+  var cat = document.querySelector("#cat");
+  var hat = document.querySelector("#hat");
+  var angle = 0, lastTime = null;
+  function animate(time) {
+    if (lastTime != null)
+      angle += (time - lastTime) * 0.001;
+    lastTime = time;
+    cat.style.top = (Math.sin(angle) * 60) + "px";
+    cat.style.left = (Math.cos(angle) * 300) + "px";
+    hat.style.top = (Math.sin(angle) * -60) + "px";
+    hat.style.left = (Math.cos(angle) * -300) + "px";
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);</script>
+
+</body>
+
+</html>
