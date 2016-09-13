@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <title>chapter 14 HTML js</title>
+
+
+
+</head>
+<body>
+  <p>Censored keyboard</p>
+<input type="text">
+<br>
+<script>
+
+//Censored keyboard
+  var field = document.querySelector("input");
+  field.addEventListener("keydown", function(event) {
+    if (event.keyCode == "Q".charCodeAt(0) ||
+        event.keyCode == "W".charCodeAt(0) ||
+        event.keyCode == "X".charCodeAt(0)){
+            event.preventDefault();
+        }
+    else {
+      console.log(String.fromCharCode(event.which));
+    }
+  });
+</script>
+
+<br>
+<div id="wrapper">
+  <div data-tabname="one">Tab one</div>
+  <div data-tabname="two">Tab two</div>
+  <div data-tabname="three">Tab three</div>
+
+</div>
+
+<script>
+//tabs assignment
+  function asTabs(node) {
+       var tabs = [];
+    for (var i = 0; i < node.childNodes.length; i++) {
+      var child = node.childNodes[i];
+      if (child.nodeType == document.ELEMENT_NODE)
+        tabs.push(child);
+    }
+
+    var tabList = document.createElement("div");
+    tabs.forEach(function(tab, i) {
+      var button = document.createElement("button");
+      button.textContent = tab.getAttribute("data-tabname");
+      button.addEventListener("click", function() { selectTab(i); });
+      tabList.appendChild(button);
+    });
+    node.insertBefore(tabList, node.firstChild);
+
+    function selectTab(n) {
+      tabs.forEach(function(tab, i) {
+        if (i == n){
+          tab.style.display = "";
+        tabList.childNodes[i].style.background = "violet";
+        }
+        else{
+          tab.style.display = "none";
+        tabList.childNodes[i].style.background = "";
+        }
+      });
+    }
+    selectTab(0);
+  }
+  asTabs(document.querySelector("#wrapper"));
+</script>
+<br>
+<a href="chapter14Dots.html" >Link to Dot project</a>
+</body>
+
+</html>
